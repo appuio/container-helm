@@ -8,6 +8,12 @@ The built images are available from [Docker Hub][hub]
 
 The main goal of this project is to provide a container image that can be used in CI/CD pipelines to deploy apps using [Helm][], the Kubernetes package manager.
 
+## Contents
+
+- `helm`
+- [helm-push][] plugin
+- `git`
+
 
 > [APPUiO](https://appuio.ch) -
 > GitHub [@appuio](https://github.com/appuio) -
@@ -15,3 +21,4 @@ The main goal of this project is to provide a container image that can be used i
 
 [hub]: https://hub.docker.com/r/appuio/helm/
 [Helm]: https://helm.sh
+[helm-push]: https://github.com/chartmuseum/helm-push
