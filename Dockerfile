@@ -1,5 +1,8 @@
 FROM alpine:latest
 
+LABEL io.openshift.s2i.scripts-url=image:///usr/libexec/s2i \
+      io.openshift.s2i.assemble-user=nobody
+
 ENV HELM_VERSION=v2.9.1 \
     HELM_HOME=/helm
 
@@ -17,7 +20,8 @@ RUN set -x \
  && tar -xzvf "/tmp/helm.tgz" \
  && ls -la /tmp \
  && cp "/tmp/linux-amd64/helm" /bin/helm \
- && rm -rf /tmp/*
+ && rm -rf /tmp/* \
+ && mkdir -p /usr/libexec/s2i
 
 RUN set -x \
  && helm init --client-only \
@@ -26,3 +30,5 @@ RUN set -x \
  && git version \
  && helm version --client \
  && helm plugin list
+
+COPY s2i/ /usr/libexec/s2i

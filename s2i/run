@@ -1,0 +1,3 @@
+#!/bin/sh
+echo "Please provide your own run script in .s2i/bin"
+exit 1
