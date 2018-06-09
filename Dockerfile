@@ -1,7 +1,7 @@
 FROM alpine:latest
 
 LABEL io.openshift.s2i.scripts-url=image:///usr/libexec/s2i \
-      io.openshift.s2i.assemble-user=nobody
+      io.openshift.s2i.assemble-user=65534:0
 
 ENV HELM_VERSION=v2.9.1 \
     HELM_HOME=/helm
@@ -32,3 +32,4 @@ RUN set -x \
  && helm plugin list
 
 COPY s2i/ /usr/libexec/s2i
+USER 65534:0
