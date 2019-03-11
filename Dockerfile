@@ -3,7 +3,7 @@ FROM alpine:latest
 LABEL io.openshift.s2i.scripts-url=image:///usr/libexec/s2i \
       io.openshift.s2i.assemble-user=65534:0
 
-ENV HELM_VERSION=v2.12.2 \
+ENV HELM_VERSION=v2.13.0 \
     HELM_HOME=/helm
 
 # `git` is used during CI/CD processes
