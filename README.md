@@ -11,7 +11,9 @@ The main goal of this project is to provide a container image that can be used i
 ## Contents
 
 - `helm`
+- [helmfile][]
 - [helm-push][] plugin
+- [helm-diff][] plugin
 - `git`
 
 
@@ -21,4 +23,6 @@ The main goal of this project is to provide a container image that can be used i
 
 [hub]: https://hub.docker.com/r/appuio/helm/
 [Helm]: https://helm.sh
+[helmfile]: https://github.com/roboll/helmfile
 [helm-push]: https://github.com/chartmuseum/helm-push
+[helm-diff]: https://github.com/databus23/helm-diff
