@@ -1,4 +1,4 @@
-FROM docker.io/library/alpine:3.9@sha256:769fddc7cc2f0a1c35abb2f91432e8beecf83916c421420e6a6da9f8975464b6
+FROM docker.io/library/alpine:3.9@sha256:7746df395af22f04212cd25a92c1d6dbc5a06a0ca9579a229ef43008d4d1302a
 
 LABEL io.openshift.s2i.scripts-url=image:///usr/libexec/s2i \
       io.openshift.s2i.assemble-user=65534:0
