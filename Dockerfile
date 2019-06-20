@@ -3,13 +3,13 @@ FROM docker.io/library/alpine:3.10@sha256:ca1c944a4f8486a153024d9965aafbe24f5723
 LABEL io.openshift.s2i.scripts-url=image:///usr/libexec/s2i \
       io.openshift.s2i.assemble-user=65534:0
 
-ENV HELM_VERSION=v2.13.1 \
+ENV HELM_VERSION=v2.14.1 \
     HELM_HOME=/helm \
-    HELMFILE_VERSION=v0.58.0
+    HELMFILE_VERSION=v0.68.1
 
 # `git` is used during CI/CD processes
 # `bash` is used in helm plugin install hooks
-RUN apk add --no-cache git bash
+RUN apk add --no-cache git bash curl
 
 RUN set -x \
  && URL="https://storage.googleapis.com/kubernetes-helm/helm-${HELM_VERSION}-linux-amd64.tar.gz" \
