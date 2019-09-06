@@ -37,4 +37,9 @@ RUN set -x \
  && helm plugin list
 
 COPY s2i/ /usr/libexec/s2i
+
+RUN mkdir /app && chmod -R g=u /app
+
+ENV HOME /app
+
 USER 65534:0
