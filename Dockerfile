@@ -8,8 +8,9 @@ ENV HELM_VERSION=v2.14.1 \
     HELMFILE_VERSION=v0.68.1
 
 # `git` is used during CI/CD processes
+# `openssh` is used to clone git repositories via SSH
 # `bash` is used in helm plugin install hooks
-RUN apk add --no-cache git bash curl
+RUN apk add --no-cache git openssh bash curl
 
 RUN set -x \
  && URL="https://storage.googleapis.com/kubernetes-helm/helm-${HELM_VERSION}-linux-amd64.tar.gz" \
