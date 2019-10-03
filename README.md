@@ -14,7 +14,9 @@ The main goal of this project is to provide a container image that can be used i
 - [helmfile][]
 - [helm-push][] plugin
 - [helm-diff][] plugin
+- [helm-secrets][] plugin
 - `git`
+- `gpg`
 
 
 > [APPUiO](https://appuio.ch) -
@@ -26,3 +28,8 @@ The main goal of this project is to provide a container image that can be used i
 [helmfile]: https://github.com/roboll/helmfile
 [helm-push]: https://github.com/chartmuseum/helm-push
 [helm-diff]: https://github.com/databus23/helm-diff
+[helm-secrets]: https://github.com/futuresimple/helm-secrets
+
+## Build the image
+
+    docker-compose up --build
