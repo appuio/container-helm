@@ -3,14 +3,15 @@ FROM docker.io/library/alpine:3.10@sha256:acd3ca9941a85e8ed16515bfc5328e4e2f8c12
 LABEL io.openshift.s2i.scripts-url=image:///usr/libexec/s2i \
       io.openshift.s2i.assemble-user=65534:0
 
-ENV HELM_VERSION=v2.14.1 \
+ENV HELM_VERSION=v2.14.3 \
     HELM_HOME=/helm \
-    HELMFILE_VERSION=v0.68.1
+    HELMFILE_VERSION=v0.85.3 \
+    SOPS_VERSION=3.4.0
 
 # `git` is used during CI/CD processes
 # `openssh` is used to clone git repositories via SSH
 # `bash` is used in helm plugin install hooks
-RUN apk add --no-cache git openssh bash curl
+RUN apk add --no-cache git openssh bash curl gnupg
 
 RUN set -x \
  && URL="https://storage.googleapis.com/kubernetes-helm/helm-${HELM_VERSION}-linux-amd64.tar.gz" \
@@ -25,12 +26,14 @@ RUN set -x \
  && rm -rf /tmp/* \
  && mkdir -p /usr/libexec/s2i \
  && wget -q -O /bin/helmfile "https://github.com/roboll/helmfile/releases/download/${HELMFILE_VERSION}/helmfile_linux_amd64" \
- && chmod +x /bin/helmfile
+ && wget -q -O /bin/sops "https://github.com/mozilla/sops/releases/download/${SOPS_VERSION}/sops-${SOPS_VERSION}.linux" \
+ && chmod +x /bin/helmfile /bin/sops
 
 RUN set -x \
  && helm init --client-only \
  && helm plugin install https://github.com/chartmuseum/helm-push \
  && helm plugin install https://github.com/databus23/helm-diff \
+ && helm plugin install https://github.com/futuresimple/helm-secrets \
  && chmod -R g+rwX "${HELM_HOME}" \
  && git version \
  && helm version --client \
