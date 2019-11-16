@@ -6,7 +6,7 @@
 
 The built images are available from [Docker Hub][hub]
 
-The main goal of this project is to provide a container image that can be used in CI/CD pipelines to deploy apps using [Helm][], the Kubernetes package manager.
+Provides a container image that can be used in CI/CD pipelines to deploy apps using [Helm][], the Kubernetes package manager.
 
 ## Contents
 
@@ -32,4 +32,6 @@ The main goal of this project is to provide a container image that can be used i
 
 ## Build the image
 
-    docker-compose up --build
+```console
+docker-compose build
+```
