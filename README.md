@@ -1,6 +1,12 @@
 # container-helm
 
-[![Docker Build Status](https://img.shields.io/docker/build/appuio/helm.svg)](https://hub.docker.com/r/appuio/helm/)
+[![dockeri.co](http://dockeri.co/image/appuio/helm)](https://hub.docker.com/r/appuio/helm/)
+
+[![Build Status](https://img.shields.io/docker/cloud/build/appuio/helm.svg)](https://hub.docker.com/r/appuio/helm/builds
+) [![GitHub issues](https://img.shields.io/github/issues-raw/appuio/container-helm.svg)](https://github.com/appuio/container-helm/issues
+) [![GitHub PRs](https://img.shields.io/github/issues-pr-raw/appuio/container-helm.svg)](https://github.com/appuio/container-helm/pulls
+) [![License](https://img.shields.io/github/license/appuio/container-helm.svg)](https://github.com/appuio/container-helm/blob/master/LICENSE)
+
 
 `helm` in a container image.
 
