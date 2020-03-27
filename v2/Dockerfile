@@ -3,10 +3,10 @@ FROM docker.io/library/alpine:3.11@sha256:cb8a924afdf0229ef7515d9e5b3024e23b3eb0
 LABEL io.openshift.s2i.scripts-url=image:///usr/libexec/s2i \
       io.openshift.s2i.assemble-user=65534:0
 
-ENV HELM_VERSION=v2.16.1 \
+ENV HELM_VERSION=v2.16.5 \
     HELM_HOME=/helm \
-    HELMFILE_VERSION=v0.92.0 \
-    SOPS_VERSION=3.4.0
+    HELMFILE_VERSION=v0.104.0 \
+    SOPS_VERSION=3.5.0
 
 # `git` is used during CI/CD processes
 # `openssh` is used to clone git repositories via SSH
@@ -14,7 +14,7 @@ ENV HELM_VERSION=v2.16.1 \
 RUN apk add --no-cache git openssh bash curl gnupg
 
 RUN set -x \
- && URL="https://storage.googleapis.com/kubernetes-helm/helm-${HELM_VERSION}-linux-amd64.tar.gz" \
+ && URL="https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz" \
  && wget -q -O /tmp/helm.tgz "${URL}" \
  && SHA256SUM=$(wget -q -O - "${URL}.sha256") \
  && cd /tmp \
@@ -33,7 +33,7 @@ RUN set -x \
  && helm init --client-only \
  && helm plugin install https://github.com/chartmuseum/helm-push \
  && helm plugin install https://github.com/databus23/helm-diff \
- && helm plugin install https://github.com/futuresimple/helm-secrets \
+ && helm plugin install https://github.com/fstech/helm-secrets \
  && chmod -R g+rwX "${HELM_HOME}" \
  && git version \
  && helm version --client \
