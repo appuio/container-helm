@@ -4,8 +4,7 @@ LABEL io.openshift.s2i.scripts-url=image:///usr/libexec/s2i \
       io.openshift.s2i.assemble-user=65534:0
 
 ENV HELM_VERSION=v3.1.2 \
-    HELM_HOME=/var/cache \
-    HELMFILE_VERSION=v0.104.0 \
+    HELMFILE_VERSION=v0.106.2 \
     SOPS_VERSION=v3.5.0
 
 # `git` is used during CI/CD processes

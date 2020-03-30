@@ -5,8 +5,8 @@ LABEL io.openshift.s2i.scripts-url=image:///usr/libexec/s2i \
 
 ENV HELM_VERSION=v2.16.5 \
     HELM_HOME=/helm \
-    HELMFILE_VERSION=v0.104.0 \
-    SOPS_VERSION=3.5.0
+    HELMFILE_VERSION=v0.106.2 \
+    SOPS_VERSION=v3.5.0
 
 # `git` is used during CI/CD processes
 # `openssh` is used to clone git repositories via SSH
