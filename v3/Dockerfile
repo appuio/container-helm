@@ -4,7 +4,7 @@ LABEL io.openshift.s2i.scripts-url=image:///usr/libexec/s2i \
       io.openshift.s2i.assemble-user=65534:0
 
 ENV HELM_VERSION=v3.1.2 \
-    HELMFILE_VERSION=v0.106.2 \
+    HELMFILE_VERSION=v0.106.3 \
     SOPS_VERSION=v3.5.0
 
 # `git` is used during CI/CD processes
@@ -36,6 +36,7 @@ RUN set -x \
  && helm plugin install https://github.com/chartmuseum/helm-push \
  && helm plugin install https://github.com/databus23/helm-diff \
  && helm plugin install https://github.com/fstech/helm-secrets \
+ && helm plugin install https://github.com/helm/helm-2to3 \
  && git version \
  && helm version \
  && helm plugin list
