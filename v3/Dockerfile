@@ -27,8 +27,7 @@ RUN set -x \
  && wget -q -O /bin/helmfile "https://github.com/roboll/helmfile/releases/download/${HELMFILE_VERSION}/helmfile_linux_amd64" \
  && wget -q -O /bin/sops "https://github.com/mozilla/sops/releases/download/${SOPS_VERSION}/sops-${SOPS_VERSION}.linux" \
  && chmod +x /bin/helmfile /bin/sops \
- && mkdir /app \
- && chmod -R g=u /app
+ && mkdir /app
 
 ENV HOME /app
 
@@ -39,7 +38,11 @@ RUN set -x \
  && helm plugin install https://github.com/helm/helm-2to3 \
  && git version \
  && helm version \
- && helm plugin list
+ && helm plugin list \
+ # Needed otherwise adding repos fails:
+ && mkdir -p /app/.config/helm \
+ && chown -R 65534 /app \
+ && chmod -R g+w /app
 
 COPY s2i/ /usr/libexec/s2i
 
