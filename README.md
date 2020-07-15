@@ -21,6 +21,7 @@ Provides a container image that can be used in CI/CD pipelines to deploy apps us
 - [helm-push][] plugin
 - [helm-diff][] plugin
 - [helm-secrets][] plugin
+- [helm-git][] plugin
 - `git`
 - `gpg`
 
@@ -35,9 +36,11 @@ Provides a container image that can be used in CI/CD pipelines to deploy apps us
 [helm-push]: https://github.com/chartmuseum/helm-push
 [helm-diff]: https://github.com/databus23/helm-diff
 [helm-secrets]: https://github.com/futuresimple/helm-secrets
+[helm-git]: https://github.com/aslafy-z/helm-git
 
 ## Build the image
 
 ```console
-docker-compose build
+docker build -f v3/Dockerfile
+docker build -f v2/Dockerfile
 ```
