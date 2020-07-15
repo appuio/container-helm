@@ -32,6 +32,7 @@ RUN set -x \
 ENV HOME /app
 
 RUN set -x \
+ && helm plugin install https://github.com/aslafy-z/helm-git --version 0.8.1 \
  && helm plugin install https://github.com/chartmuseum/helm-push \
  && helm plugin install https://github.com/databus23/helm-diff \
  && helm plugin install https://github.com/fstech/helm-secrets \
