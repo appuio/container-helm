@@ -3,10 +3,10 @@ FROM docker.io/library/alpine:3.12@sha256:a15790640a6690aa1730c38cf0a440e2aa44aa
 LABEL io.openshift.s2i.scripts-url=image:///usr/libexec/s2i \
       io.openshift.s2i.assemble-user=65534:0
 
-ENV HELM_VERSION=v2.16.9 \
+ENV HELM_VERSION=v2.16.12 \
     HELM_HOME=/helm \
-    HELMFILE_VERSION=v0.119.1 \
-    SOPS_VERSION=v3.5.0
+    HELMFILE_VERSION=v0.130.0 \
+    SOPS_VERSION=v3.6.1
 
 # `git` is used during CI/CD processes
 # `openssh` is used to clone git repositories via SSH
