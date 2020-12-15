@@ -3,8 +3,8 @@ FROM docker.io/library/alpine:3.12@sha256:25f5332d060da2c7ea2c8a85d2eac623bd0b5f
 LABEL io.openshift.s2i.scripts-url=image:///usr/libexec/s2i \
       io.openshift.s2i.assemble-user=65534:0
 
-ENV HELM_VERSION=v3.3.4 \
-    HELMFILE_VERSION=v0.130.0 \
+ENV HELM_VERSION=v3.4.2 \
+    HELMFILE_VERSION=v0.135.0 \
     SOPS_VERSION=v3.6.1
 
 # `git` is used during CI/CD processes
