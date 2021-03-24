@@ -35,7 +35,7 @@ Provides a container image that can be used in CI/CD pipelines to deploy apps us
 [helmfile]: https://github.com/roboll/helmfile
 [helm-push]: https://github.com/chartmuseum/helm-push
 [helm-diff]: https://github.com/databus23/helm-diff
-[helm-secrets]: https://github.com/futuresimple/helm-secrets
+[helm-secrets]: https://github.com/jkroepke/helm-secrets
 [helm-git]: https://github.com/aslafy-z/helm-git
 
 ## Build the image

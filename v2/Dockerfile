@@ -3,15 +3,15 @@ FROM docker.io/library/alpine:3.13@sha256:a75afd8b57e7f34e4dad8d65e2c7ba2e1975c7
 LABEL io.openshift.s2i.scripts-url=image:///usr/libexec/s2i \
       io.openshift.s2i.assemble-user=65534:0
 
-ENV HELM_VERSION=v2.16.12 \
+ENV HELM_VERSION=v2.17.0 \
     HELM_HOME=/helm \
-    HELMFILE_VERSION=v0.130.0 \
+    HELMFILE_VERSION=v0.138.7 \
     SOPS_VERSION=v3.6.1
 
 # `git` is used during CI/CD processes
 # `openssh` is used to clone git repositories via SSH
 # `bash` is used in helm plugin install hooks
-RUN apk add --no-cache git openssh bash curl gnupg
+RUN apk add --no-cache git openssh bash curl gnupg make
 
 RUN set -x \
  && URL="https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz" \
