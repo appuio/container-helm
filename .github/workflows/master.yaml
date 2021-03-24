@@ -1,7 +1,8 @@
 name: Master
 
 on:
-  branches:
+  push:
+    branches:
     - master
 
 jobs:
