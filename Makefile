@@ -1,4 +1,4 @@
-IMAGE_CONTEXT ?= v3
+DOCKERFILE ?= v3/Dockerfile
 IMAGE_TAG ?= latest
 
 
@@ -9,7 +9,7 @@ help: ## Show this help
 
 .PHONY: docker-build
 docker-build: ## Build docker images with latest tag
-	docker build -t "docker.io/appuio/helm:$(IMAGE_TAG)" -t "quay.io/appuio/helm:$(IMAGE_TAG)" $(IMAGE_CONTEXT)
+	docker build -t "docker.io/appuio/helm:$(IMAGE_TAG)" -t "quay.io/appuio/helm:$(IMAGE_TAG)" -f $(DOCKERFILE) .
 
 .PHONY: docker-push
 docker-push: ## Push docker images to docker.io and quay.io (requires to be logged in to both registries)

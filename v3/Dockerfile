@@ -1,8 +1,5 @@
 FROM docker.io/library/alpine:3.13@sha256:a75afd8b57e7f34e4dad8d65e2c7ba2e1975c795ce1ee22fa34f8cf46f96a3be
 
-LABEL io.openshift.s2i.scripts-url=image:///usr/libexec/s2i \
-      io.openshift.s2i.assemble-user=65534:0
-
 ENV HELM_VERSION=v3.5.3 \
     HELMFILE_VERSION=v0.138.7 \
     SOPS_VERSION=v3.6.1
@@ -23,7 +20,6 @@ RUN set -x \
  && ls -la /tmp \
  && cp "/tmp/linux-amd64/helm" /bin/helm \
  && rm -rf /tmp/* \
- && mkdir -p /usr/libexec/s2i \
  && wget -q -O /bin/helmfile "https://github.com/roboll/helmfile/releases/download/${HELMFILE_VERSION}/helmfile_linux_amd64" \
  && wget -q -O /bin/sops "https://github.com/mozilla/sops/releases/download/${SOPS_VERSION}/sops-${SOPS_VERSION}.linux" \
  && chmod +x /bin/helmfile /bin/sops \
@@ -44,7 +40,5 @@ RUN set -x \
  && mkdir -p /app/.config/helm \
  && chown -R 65534 /app \
  && chmod -R g+w /app
-
-COPY s2i/ /usr/libexec/s2i
 
 USER 65534:0
