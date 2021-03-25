@@ -1,0 +1,26 @@
+name: Release
+
+on:
+  push:
+    tags:
+    - "*"
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Login to Docker hub
+      run: docker login -u "${{ secrets.DOCKER_USERNAME }}" -p "${{ secrets.DOCKER_PASSWORD }}" docker.io
+    - name: Login to quay.io
+      run: docker login -u "${{ secrets.QUAY_IO_USERNAME }}" -p "${{ secrets.QUAY_IO_PASSWORD }}" quay.io
+
+    - name: Set version from tag
+      run: echo IMAGE_TAG=$(echo ${GITHUB_REF#refs/tags/}) >> $GITHUB_ENV
+
+    - name: Build docker image
+      run: make docker-build
+
+    - name: Push docker image
+      run: make docker-push

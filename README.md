@@ -1,16 +1,14 @@
 # container-helm
 
-[![dockeri.co](http://dockeri.co/image/appuio/helm)](https://hub.docker.com/r/appuio/helm/)
-
-[![Build Status](https://img.shields.io/docker/cloud/build/appuio/helm.svg)](https://hub.docker.com/r/appuio/helm/builds
-) [![GitHub issues](https://img.shields.io/github/issues-raw/appuio/container-helm.svg)](https://github.com/appuio/container-helm/issues
-) [![GitHub PRs](https://img.shields.io/github/issues-pr-raw/appuio/container-helm.svg)](https://github.com/appuio/container-helm/pulls
-) [![License](https://img.shields.io/github/license/appuio/container-helm.svg)](https://github.com/appuio/container-helm/blob/master/LICENSE)
-
+[![Build Status](https://img.shields.io/github/workflow/status/appuio/container-helm/Master)](https://github.com/vshn/k8up/actions/workflows/master.yml)
+[![License](https://img.shields.io/github/license/appuio/container-helm.svg)](https://github.com/appuio/container-helm/blob/master/LICENSE)
 
 `helm` in a container image.
 
-The built images are available from [Docker Hub][hub]
+The built images are available from
+
+* [Docker Hub][hub]
+* [Quay.io][quay]
 
 Provides a container image that can be used in CI/CD pipelines to deploy apps using [Helm][], the Kubernetes package manager.
 
@@ -31,6 +29,7 @@ Provides a container image that can be used in CI/CD pipelines to deploy apps us
 > Twitter [@appuio](https://twitter.com/appuio)
 
 [hub]: https://hub.docker.com/r/appuio/helm/
+[quay]: https://quay.io/repository/appuio/helm
 [Helm]: https://helm.sh
 [helmfile]: https://github.com/roboll/helmfile
 [helm-push]: https://github.com/chartmuseum/helm-push
@@ -41,6 +40,11 @@ Provides a container image that can be used in CI/CD pipelines to deploy apps us
 ## Build the image
 
 ```console
-docker build -f v3/Dockerfile
-docker build -f v2/Dockerfile
+make docker-build
 ```
+
+## Helm v2
+
+Helm v2 has reached EOL.
+As such, no new image tags will be pushed.
+The last available tag is v2.17.0 on both docker.io and quay.io.

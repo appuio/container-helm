@@ -1,3 +1,0 @@
-#!/bin/sh
-echo "Please provide your own assemble script in .s2i/bin"
-exit 1
