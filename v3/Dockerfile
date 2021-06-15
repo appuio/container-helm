@@ -1,4 +1,4 @@
-FROM docker.io/library/alpine:3.13@sha256:69e70a79f2d41ab5d637de98c1e0b055206ba40a8145e7bddb55ccc04e13cf8f
+FROM docker.io/library/alpine:3.14@sha256:a8409dff6597f2ef5f7ecd3c672671bb2af9a390073efd74f95c54aa41cba22a
 
 ENV HELM_VERSION=v3.5.3 \
     HELMFILE_VERSION=v0.138.7 \
