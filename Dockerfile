@@ -1,13 +1,13 @@
-FROM docker.io/library/alpine:3.13@sha256:69e70a79f2d41ab5d637de98c1e0b055206ba40a8145e7bddb55ccc04e13cf8f
+FROM docker.io/library/alpine:3.15
 
-ENV HELM_VERSION=v3.5.3 \
-    HELMFILE_VERSION=v0.138.7 \
+ENV HELM_VERSION=v3.7.2 \
+    HELMFILE_VERSION=v0.142.0 \
     SOPS_VERSION=v3.7.1
 
 # `git` is used during CI/CD processes
 # `openssh` is used to clone git repositories via SSH
 # `bash` is used in helm plugin install hooks
-RUN apk add --no-cache git openssh bash curl gnupg make
+RUN apk add --no-cache git openssh bash curl gnupg make ca-certificates
 
 RUN set -x \
  && URL="https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz" \
@@ -28,7 +28,7 @@ RUN set -x \
 ENV HOME /app
 
 RUN set -x \
- && helm plugin install https://github.com/aslafy-z/helm-git --version 0.8.1 \
+ && helm plugin install https://github.com/aslafy-z/helm-git \
  && helm plugin install https://github.com/chartmuseum/helm-push \
  && helm plugin install https://github.com/databus23/helm-diff \
  && helm plugin install https://github.com/jkroepke/helm-secrets \
