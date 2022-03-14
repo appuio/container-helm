@@ -7,7 +7,8 @@ ENV HELM_VERSION=v3.7.2 \
 # `git` is used during CI/CD processes
 # `openssh` is used to clone git repositories via SSH
 # `bash` is used in helm plugin install hooks
-RUN apk add --no-cache git openssh bash curl gnupg make ca-certificates
+# `jq` and `yq` are used in certain pipelines
+RUN apk add --no-cache git openssh bash curl gnupg make ca-certificates yq jq
 
 RUN set -x \
  && URL="https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz" \
