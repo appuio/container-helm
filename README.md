@@ -22,6 +22,8 @@ Provides a container image that can be used in CI/CD pipelines to deploy apps us
 - [helm-git][] plugin
 - `git`
 - `gpg`
+- `jq`
+- `yq`
 
 
 > [APPUiO](https://appuio.ch) -
