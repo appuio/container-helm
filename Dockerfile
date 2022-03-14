@@ -1,8 +1,8 @@
 FROM docker.io/library/alpine:3.15
 
-ENV HELM_VERSION=v3.7.2 \
-    HELMFILE_VERSION=v0.142.0 \
-    SOPS_VERSION=v3.7.1
+ENV HELM_VERSION=v3.8.1 \
+    HELMFILE_VERSION=v0.143.1 \
+    SOPS_VERSION=v3.7.2
 
 # `git` is used during CI/CD processes
 # `openssh` is used to clone git repositories via SSH
