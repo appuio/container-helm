@@ -15,6 +15,7 @@ Provides a container image that can be used in CI/CD pipelines to deploy apps us
 ## Contents
 
 - `helm`
+- `kubectl`
 - [helmfile][]
 - [helm-push][] plugin
 - [helm-diff][] plugin
