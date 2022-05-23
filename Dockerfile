@@ -1,4 +1,4 @@
-FROM docker.io/library/alpine:3.15
+FROM docker.io/library/alpine:3.16
 
 ENV HELM_VERSION=v3.8.1 \
     HELMFILE_VERSION=v0.143.1 \
