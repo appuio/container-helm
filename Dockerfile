@@ -1,9 +1,12 @@
 FROM docker.io/library/alpine:3.16
 
-ENV HELM_VERSION=v3.8.1 \
-    HELMFILE_VERSION=v0.143.1 \
-    SOPS_VERSION=v3.7.2 \
-    KUBECTL_VERSION=v1.23.5
+# renovate: datasource=github-releases depName=helm/helm
+ENV HELM_VERSION=v3.10.0
+# renovate: datasource=github-releases depName=helmfile/helmfile
+ENV HELMFILE_VERSION=v0.147.0
+# renovate: datasource=github-releases depName=mozilla/sops
+ENV SOPS_VERSION=v3.7.3
+ENV KUBECTL_VERSION=v1.23.5
 
 # `git` is used during CI/CD processes
 # `openssh` is used to clone git repositories via SSH
@@ -30,7 +33,13 @@ RUN set -x \
  && tar -xzvf /tmp/kubectl.tgz \
  && mv kubernetes/client/bin/kubectl /bin/kubectl \
  # Helmfile
- && wget -q -O /bin/helmfile "https://github.com/roboll/helmfile/releases/download/${HELMFILE_VERSION}/helmfile_linux_amd64" \
+ && HELMFILE_RELEASE_URL="https://github.com/helmfile/helmfile/releases/download/${HELMFILE_VERSION}/helmfile_${HELMFILE_VERSION#v}" \
+ && wget -q -O /tmp/helmfile_${HELMFILE_VERSION#v}_linux_amd64.tar.gz "${HELMFILE_RELEASE_URL}_linux_amd64.tar.gz" \
+ && wget -q -O /tmp/CHECKSUM "${HELMFILE_RELEASE_URL}_checksums.txt" \
+ && sed -i '/_linux_amd64.tar.gz/!d' /tmp/CHECKSUM \
+ && sha256sum -c /tmp/CHECKSUM \
+ && tar -xzf /tmp/helmfile_${HELMFILE_VERSION#v}_linux_amd64.tar.gz \
+ && cp /tmp/helmfile /bin/helmfile \
  # Sops
  && wget -q -O /bin/sops "https://github.com/mozilla/sops/releases/download/${SOPS_VERSION}/sops-${SOPS_VERSION}.linux" \
  && chmod +x /bin/helmfile /bin/sops \
