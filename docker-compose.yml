@@ -2,7 +2,7 @@ version: '3'
 services:
   container-helm:
     build: ./
-    image: docker.io/appuio/helm
+    image: ghcr.io/appuio/helm
     command: ["/bin/bash"]
     stdin_open: true
     tty: true

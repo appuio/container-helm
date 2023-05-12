@@ -8,9 +8,9 @@ help: ## Show this help
 
 .PHONY: docker-build
 docker-build: ## Build docker images with latest tag
-	docker build -t "docker.io/appuio/helm:$(IMAGE_TAG)" -t "quay.io/appuio/helm:$(IMAGE_TAG)" .
+	docker build -t "ghcr.io/appuio/helm:$(IMAGE_TAG)" -t "quay.io/appuio/helm:$(IMAGE_TAG)" .
 
 .PHONY: docker-push
-docker-push: ## Push docker images to docker.io and quay.io (requires to be logged in to both registries)
-	docker push "docker.io/appuio/helm:$(IMAGE_TAG)"
-	docker push   "quay.io/appuio/helm:$(IMAGE_TAG)"
+docker-push: ## Push docker images to quay.io (requires to be logged in)
+	docker push "ghcr.io/appuio/helm:$(IMAGE_TAG)"
+	docker push "quay.io/appuio/helm:$(IMAGE_TAG)"
