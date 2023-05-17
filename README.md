@@ -33,6 +33,13 @@ Provides a container image that can be used in CI/CD pipelines to deploy apps us
 make docker-build
 ```
 
+## Release Image
+
+Whenever the Helm version was updated, tag a new version:
+
+    ./tag-release.sh
+    git push --tags
+
 
 ## Helm v2
 
