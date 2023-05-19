@@ -1,6 +1,6 @@
 # container-helm
 
-[![License](https://img.shields.io/github/license/appuio/container-helm.svg)](https://github.com/appuio/container-helm/blob/master/LICENSE)
+[![License](https://img.shields.io/github/license/appuio/container-helm.svg)](https://github.com/appuio/container-helm/blob/main/LICENSE)
 
 `helm` in a container image.
 
