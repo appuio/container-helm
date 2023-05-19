@@ -1,7 +1,10 @@
 {
   "extends": [
-    "config:base"
+    "config:base",
+    ":assignAndReview(mhutter)",
+    ":automergePatch"
   ],
+  "platformAutomerge": true,
   "regexManagers": [
     {
       "fileMatch": [
