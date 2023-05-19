@@ -3,7 +3,7 @@ name: Release
 on:
   push:
     branches:
-      - master
+      - main
     tags:
     - "v*"
 
@@ -38,7 +38,7 @@ jobs:
         # Strip "v" prefix from tag name
         [[ "${{ github.ref }}" == "refs/tags/"* ]] && IMAGE_TAG=$(echo $IMAGE_TAG | sed -e 's/^v//')
         # Use Docker `latest` tag convention
-        [ "$IMAGE_TAG" == "master" ] && IMAGE_TAG=latest
+        [ "$IMAGE_TAG" == "main" ] && IMAGE_TAG=latest
 
         echo "IMAGE_TAG=${IMAGE_TAG}" | tee -a $GITHUB_ENV
 
