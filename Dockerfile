@@ -5,7 +5,7 @@ ENV HELM_VERSION=v3.13.0
 # renovate: datasource=github-releases depName=helmfile/helmfile
 ENV HELMFILE_VERSION=v0.157.0
 # renovate: datasource=github-releases depName=mozilla/sops
-ENV SOPS_VERSION=v3.7.3
+ENV SOPS_VERSION=v3.8.0
 # renovate: datasource=github-releases depName=kubernetes/kubernetes
 ENV KUBECTL_VERSION=v1.28.2
 
@@ -42,7 +42,7 @@ RUN set -x \
  && tar -xzf /tmp/helmfile_${HELMFILE_VERSION#v}_linux_amd64.tar.gz \
  && cp /tmp/helmfile /bin/helmfile \
  # Sops
- && wget -q -O /bin/sops "https://github.com/mozilla/sops/releases/download/${SOPS_VERSION}/sops-${SOPS_VERSION}.linux" \
+ && wget -q -O /bin/sops "https://github.com/mozilla/sops/releases/download/${SOPS_VERSION}/sops-${SOPS_VERSION}.linux.amd64" \
  && chmod +x /bin/helmfile /bin/sops \
  # Cleanup
  && rm -rf /tmp/* \
