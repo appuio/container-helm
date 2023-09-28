@@ -42,7 +42,7 @@ RUN set -x \
  && tar -xzf /tmp/helmfile_${HELMFILE_VERSION#v}_linux_amd64.tar.gz \
  && cp /tmp/helmfile /bin/helmfile \
  # Sops
- && wget -q -O /bin/sops "https://github.com/mozilla/sops/releases/download/${SOPS_VERSION}/sops-${SOPS_VERSION}.linux" \
+ && wget -q -O /bin/sops "https://github.com/mozilla/sops/releases/download/${SOPS_VERSION}/sops-${SOPS_VERSION}.linux.amd64" \
  && chmod +x /bin/helmfile /bin/sops \
  # Cleanup
  && rm -rf /tmp/* \
