@@ -7,7 +7,7 @@ ENV HELMFILE_VERSION=v0.159.0
 # renovate: datasource=github-releases depName=mozilla/sops
 ENV SOPS_VERSION=v3.8.1
 # renovate: datasource=github-releases depName=kubernetes/kubernetes
-ENV KUBECTL_VERSION=v1.28.5
+ENV KUBECTL_VERSION=v1.28.6
 
 # `git` is used during CI/CD processes
 # `openssh` is used to clone git repositories via SSH
