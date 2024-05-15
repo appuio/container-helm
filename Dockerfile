@@ -3,7 +3,7 @@ FROM docker.io/library/alpine:3.19
 # renovate: datasource=github-releases depName=helm/helm
 ENV HELM_VERSION=v3.14.4
 # renovate: datasource=github-releases depName=helmfile/helmfile
-ENV HELMFILE_VERSION=v0.163.1
+ENV HELMFILE_VERSION=v0.164.0
 # renovate: datasource=github-releases depName=mozilla/sops
 ENV SOPS_VERSION=v3.8.1
 # renovate: datasource=github-releases depName=kubernetes/kubernetes
