@@ -1,7 +1,7 @@
 FROM docker.io/library/alpine:3.20
 
 # renovate: datasource=github-releases depName=helm/helm
-ENV HELM_VERSION=v3.15.3
+ENV HELM_VERSION=v3.15.4
 # renovate: datasource=github-releases depName=helmfile/helmfile
 ENV HELMFILE_VERSION=v0.167.1
 # renovate: datasource=github-releases depName=mozilla/sops
