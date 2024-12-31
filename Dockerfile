@@ -1,4 +1,4 @@
-FROM docker.io/library/alpine:3.20
+FROM docker.io/library/alpine:3.21
 
 # renovate: datasource=github-releases depName=helm/helm
 ENV HELM_VERSION=v3.16.4
