@@ -5,7 +5,7 @@ ENV HELM_VERSION=v3.16.4
 # renovate: datasource=github-releases depName=helmfile/helmfile
 ENV HELMFILE_VERSION=v0.169.2
 # renovate: datasource=github-releases depName=mozilla/sops
-ENV SOPS_VERSION=v3.9.2
+ENV SOPS_VERSION=v3.9.3
 # renovate: datasource=github-releases depName=kubernetes/kubernetes
 ENV KUBECTL_VERSION=v1.31.4
 
