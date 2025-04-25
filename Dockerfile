@@ -13,7 +13,7 @@ ENV KUBECTL_VERSION=v1.32.4
 # `openssh` is used to clone git repositories via SSH
 # `bash` is used in helm plugin install hooks
 # `jq` and `yq` are used in certain pipelines
-RUN apk add --no-cache git openssh bash curl gnupg make ca-certificates yq jq
+RUN apk add --no-cache git openssh bash curl gnupg make ca-certificates yq jq shadow
 
 RUN set -x \
  && cd /tmp \
@@ -46,9 +46,8 @@ RUN set -x \
  && chmod +x /bin/helmfile /bin/sops \
  # Cleanup
  && rm -rf /tmp/* \
- && mkdir /app
-
-ENV HOME /app
+ && mkdir /app \
+ && usermod -d /app nobody
 
 RUN set -x \
  && helm plugin install https://github.com/aslafy-z/helm-git \
