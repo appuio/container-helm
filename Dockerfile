@@ -49,6 +49,9 @@ RUN set -x \
  && mkdir /app \
  && usermod -d /app nobody
 
+# Needed for Helm to install plugins in the right place
+env HOME=/app
+
 RUN set -x \
  && helm plugin install https://github.com/aslafy-z/helm-git \
  && helm plugin install https://github.com/chartmuseum/helm-push \
