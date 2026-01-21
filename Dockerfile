@@ -1,13 +1,16 @@
 FROM docker.io/library/alpine:3.22
 
 # renovate: datasource=github-releases depName=helm/helm
-ENV HELM_VERSION=v3.18.6
+ENV HELM_VERSION=v4.1.0
 # renovate: datasource=github-releases depName=helmfile/helmfile
 ENV HELMFILE_VERSION=v1.1.9
 # renovate: datasource=github-releases depName=mozilla/sops
 ENV SOPS_VERSION=v3.10.2
 # renovate: datasource=github-releases depName=kubernetes/kubernetes
 ENV KUBECTL_VERSION=v1.33.7
+
+# renovate: datasource=github-releases depName=jkroepke/helm-secrets
+ENV HELM_PLUGIN_SECRETS_VERSION=4.7.4
 
 # `git` is used during CI/CD processes
 # `openssh` is used to clone git repositories via SSH
@@ -52,12 +55,19 @@ RUN set -x \
 # Needed for Helm to install plugins in the right place
 env HOME=/app
 
+COPY .gpg /.gpg
+
 RUN set -x \
- && helm plugin install https://github.com/aslafy-z/helm-git \
- && helm plugin install https://github.com/chartmuseum/helm-push \
- && helm plugin install https://github.com/databus23/helm-diff \
- && helm plugin install https://github.com/jkroepke/helm-secrets \
- && helm plugin install https://github.com/helm/helm-2to3 \
+ && gpg --import /.gpg/jkroepke.gpg \
+ && mkdir -p /root/.gnupg \
+ && gpg --export >~/.gnupg/pubring.gpg \
+ && helm plugin install https://github.com/aslafy-z/helm-git --verify=false \
+ && helm plugin install https://github.com/chartmuseum/helm-push --verify=false \
+ && helm plugin install https://github.com/databus23/helm-diff --verify=false \
+ && helm plugin install https://github.com/jkroepke/helm-secrets/releases/download/v${HELM_PLUGIN_SECRETS_VERSION}/secrets-${HELM_PLUGIN_SECRETS_VERSION}.tgz \
+ && helm plugin install https://github.com/jkroepke/helm-secrets/releases/download/v${HELM_PLUGIN_SECRETS_VERSION}/secrets-getter-${HELM_PLUGIN_SECRETS_VERSION}.tgz \
+ && helm plugin install https://github.com/jkroepke/helm-secrets/releases/download/v${HELM_PLUGIN_SECRETS_VERSION}/secrets-post-renderer-${HELM_PLUGIN_SECRETS_VERSION}.tgz \
+ && helm plugin install https://github.com/helm/helm-2to3 --verify=false \
  && git version \
  && helm version \
  && helm plugin list \
