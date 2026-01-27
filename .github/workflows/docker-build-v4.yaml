@@ -1,4 +1,4 @@
-name: Release
+name: Release v4
 
 on:
   push:
@@ -7,8 +7,9 @@ on:
     tags:
     - "v*"
     paths:
-      - .github/workflows/pr.yaml
-      - Dockerfile
+      - .github/workflows/pr-v4.yaml
+      - .gpg/**
+      - Dockerfile.v4
 
 jobs:
   # Push image to GitHub Packages.
@@ -24,13 +25,6 @@ jobs:
     - name: Log in to GitHub Package Registry
       run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $ --password-stdin
 
-    - name: Log in to quay.io
-      uses: docker/login-action@v3
-      with:
-        registry: quay.io
-        username: ${{ secrets.QUAY_IO_USERNAME }}
-        password: ${{ secrets.QUAY_IO_PASSWORD }}
-
     - name: Set image tag from Git ref
       run: |
         # Strip git ref prefix from version
@@ -43,7 +37,7 @@ jobs:
         echo "IMAGE_TAG=${IMAGE_TAG}" | tee -a $GITHUB_ENV
 
     - name: Build docker image
-      run: make docker-build
+      run: make docker-build-v4
 
     - name: Push docker image
-      run: make docker-push
+      run: make docker-push-v4
