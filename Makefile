@@ -14,3 +14,12 @@ docker-build: ## Build docker images with latest tag
 docker-push: ## Push docker images to quay.io (requires to be logged in)
 	docker push "ghcr.io/appuio/helm:$(IMAGE_TAG)"
 	docker push "quay.io/appuio/helm:$(IMAGE_TAG)"
+
+.PHONY: docker-build-v4
+docker-build-v4: ## Build docker images with latest tag
+	docker build -t "ghcr.io/appuio/helm-v4:$(IMAGE_TAG)" -t "quay.io/appuio/helm-v4:$(IMAGE_TAG)" . -f Dockerfile.v4
+
+.PHONY: docker-push-v4
+docker-push-v4: ## Push docker images to quay.io (requires to be logged in)
+	docker push "ghcr.io/appuio/helm-v4:$(IMAGE_TAG)"
+	docker push "quay.io/appuio/helm-v4:$(IMAGE_TAG)"

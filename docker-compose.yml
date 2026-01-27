@@ -1,8 +1,18 @@
 version: '3'
 services:
   container-helm:
-    build: ./
+    build:
+      context: .
+      dockerfile: Dockerfile
     image: ghcr.io/appuio/helm
+    command: ["/bin/bash"]
+    stdin_open: true
+    tty: true
+  container-helmv4:
+    build:
+      context: .
+      dockerfile: Dockerfile.v4
+    image: ghcr.io/appuio/helm-v4
     command: ["/bin/bash"]
     stdin_open: true
     tty: true
