@@ -67,7 +67,6 @@ RUN set -x \
  && helm plugin install https://github.com/jkroepke/helm-secrets/releases/download/v${HELM_PLUGIN_SECRETS_VERSION}/secrets-${HELM_PLUGIN_SECRETS_VERSION}.tgz \
  && helm plugin install https://github.com/jkroepke/helm-secrets/releases/download/v${HELM_PLUGIN_SECRETS_VERSION}/secrets-getter-${HELM_PLUGIN_SECRETS_VERSION}.tgz \
  && helm plugin install https://github.com/jkroepke/helm-secrets/releases/download/v${HELM_PLUGIN_SECRETS_VERSION}/secrets-post-renderer-${HELM_PLUGIN_SECRETS_VERSION}.tgz \
- && helm plugin install https://github.com/helm/helm-2to3 --verify=false \
  && git version \
  && helm version \
  && helm plugin list \
