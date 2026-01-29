@@ -10,7 +10,7 @@ The built images are available from the GitHub Container Registry:
 
 Provides a container image that can be used in CI/CD pipelines to deploy apps using [Helm][], the Kubernetes package manager.
 
-**NOTE** Image is no longer pushed to Docker Hub. Use the GHCR.io image instead. The Quay.io image is kept for backwards compatibility for now, but is also considered deprecated.
+**NOTE** Image is no longer pushed to Docker Hub. Use the GHCR.io image instead.
 
 ## Contents
 
