@@ -40,14 +40,6 @@ Whenever the Helm version was updated, tag a new version:
     ./tag-release.sh
     git push --tags
 
-
-## Helm v2
-
-Helm v2 has reached EOL.
-As such, no new image tags will be pushed.
-The last available tag is v2.17.0 on both docker.io and quay.io.
-
-
 ---
 
 > [APPUiO](https://appuio.ch) -
