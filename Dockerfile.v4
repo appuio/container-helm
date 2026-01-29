@@ -10,7 +10,7 @@ ENV SOPS_VERSION=v3.11.0
 ENV KUBECTL_VERSION=v1.35.0
 
 # renovate: datasource=github-releases depName=jkroepke/helm-secrets
-ENV HELM_PLUGIN_SECRETS_VERSION=4.7.4
+ENV HELM_PLUGIN_SECRETS_VERSION=4.7.5
 
 # `git` is used during CI/CD processes
 # `openssh` is used to clone git repositories via SSH
