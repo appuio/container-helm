@@ -50,7 +50,7 @@ RUN set -x \
  && usermod -d /app nobody
 
 # Needed for Helm to install plugins in the right place
-env HOME=/app
+ENV HOME=/app
 
 RUN set -x \
  && helm plugin install https://github.com/aslafy-z/helm-git \

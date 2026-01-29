@@ -53,7 +53,7 @@ RUN set -x \
  && usermod -d /app nobody
 
 # Needed for Helm to install plugins in the right place
-env HOME=/app
+ENV HOME=/app
 
 COPY .gpg /.gpg
 
