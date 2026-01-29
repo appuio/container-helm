@@ -7,7 +7,7 @@ on:
     tags:
     - "v*"
     paths:
-      - .github/workflows/pr-v4.yaml
+      - .github/workflows/docker-build-v4.yaml
       - .gpg/**
       - Dockerfile.v4
 
