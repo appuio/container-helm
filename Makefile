@@ -1,5 +1,9 @@
 IMAGE_TAG ?= latest
 
+ifeq ($(IMAGE_PATH),)
+IMAGE_PATH := appuio
+endif
+
 
 .PHONY: help
 help: ## Show this help
@@ -8,16 +12,16 @@ help: ## Show this help
 
 .PHONY: docker-build
 docker-build: ## Build docker images with latest tag
-	docker build -t "ghcr.io/appuio/helm:$(IMAGE_TAG)" .
+	docker build -t "ghcr.io/$(IMAGE_PATH)/helm:$(IMAGE_TAG)" .
 
 .PHONY: docker-push
 docker-push:
-	docker push "ghcr.io/appuio/helm:$(IMAGE_TAG)"
+	docker push "ghcr.io/$(IMAGE_PATH)/helm:$(IMAGE_TAG)"
 
 .PHONY: docker-build-v4
 docker-build-v4: ## Build docker images with latest tag
-	docker build -t "ghcr.io/appuio/helm-v4:$(IMAGE_TAG)" . -f Dockerfile.v4
+	docker build -t "ghcr.io/$(IMAGE_PATH)/helm-v4:$(IMAGE_TAG)" . -f Dockerfile.v4
 
 .PHONY: docker-push-v4
 docker-push-v4:
-	docker push "ghcr.io/appuio/helm-v4:$(IMAGE_TAG)"
+	docker push "ghcr.io/$(IMAGE_PATH)/helm-v4:$(IMAGE_TAG)"

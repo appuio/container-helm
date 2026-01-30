@@ -11,6 +11,9 @@ on:
       - .gpg/**
       - Dockerfile.v4
 
+env:
+  IMAGE_PATH: ${{ vars.IMAGE_PATH }}
+
 jobs:
   # Push image to GitHub Packages.
   docker:
