@@ -5,7 +5,7 @@ on:
     branches:
       - main
     tags:
-    - "v*"
+    - "v4*"
     paths:
       - .github/workflows/docker-build-v4.yaml
       - .gpg/**
