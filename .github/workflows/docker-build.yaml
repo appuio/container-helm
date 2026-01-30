@@ -10,6 +10,9 @@ on:
       - .github/workflows/pr.yaml
       - Dockerfile
 
+env:
+  IMAGE_PATH: ${{ vars.IMAGE_PATH }}
+
 jobs:
   # Push image to GitHub Packages.
   docker:
