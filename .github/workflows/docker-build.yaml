@@ -5,7 +5,7 @@ on:
     branches:
       - main
     tags:
-    - "v*"
+    - "v3*"
     paths:
       - .github/workflows/pr.yaml
       - Dockerfile
