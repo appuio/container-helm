@@ -1,0 +1,7 @@
+apiVersion: v2
+name: testchart
+version: 0.1.0
+dependencies:
+  - name: haproxy
+    version: "2.7.2"
+    repository: "https://charts.appuio.ch"
