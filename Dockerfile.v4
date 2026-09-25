@@ -6,6 +6,10 @@ ENV HELM_VERSION=v4.3.0
 ENV HELMFILE_VERSION=v1.8.0
 # renovate: datasource=github-releases depName=mozilla/sops
 ENV SOPS_VERSION=v3.13.3
+# renovate: datasource=github-releases depName=aslafy-z/helm-git
+ENV HELM_GIT_VERSION=v1.5.2
+# renovate: datasource=github-releases depName=chartmuseum/helm-push
+ENV HELM_PUSH_VERSION=v0.11.1
 # renovate: datasource=github-releases depName=databus23/helm-diff
 ENV HELM_DIFF_VERSION=v3.15.14
 # renovate: datasource=github-releases depName=kubernetes/kubernetes
@@ -65,8 +69,8 @@ RUN set -x \
  && gpg --import /.gpg/jkroepke.gpg \
  && mkdir -p /root/.gnupg \
  && gpg --export >~/.gnupg/pubring.gpg \
- && helm plugin install https://github.com/aslafy-z/helm-git --verify=false \
- && helm plugin install https://github.com/chartmuseum/helm-push --verify=false \
+ && helm plugin install https://github.com/aslafy-z/helm-git --verify=false --version "$HELM_GIT_VERSION" \
+ && helm plugin install https://github.com/chartmuseum/helm-push --verify=false --version "$HELM_PUSH_VERSION" \
  && helm plugin install https://github.com/databus23/helm-diff --verify=false --version "$HELM_DIFF_VERSION" \
  && helm plugin install https://github.com/jkroepke/helm-secrets/releases/download/v${HELM_PLUGIN_SECRETS_VERSION}/secrets-${HELM_PLUGIN_SECRETS_VERSION}.tgz \
  && helm plugin install https://github.com/jkroepke/helm-secrets/releases/download/v${HELM_PLUGIN_SECRETS_VERSION}/secrets-getter-${HELM_PLUGIN_SECRETS_VERSION}.tgz \
