@@ -11,7 +11,7 @@ ENV HELM_GIT_VERSION=v1.5.2
 # renovate: datasource=github-releases depName=chartmuseum/helm-push
 ENV HELM_PUSH_VERSION=v0.11.1
 # renovate: datasource=github-releases depName=databus23/helm-diff
-ENV HELM_DIFF_VERSION=v3.15.14
+ENV HELM_DIFF_VERSION=v3.15.15
 # renovate: datasource=github-releases depName=jkroepke/helm-secrets
 ENV HELM_PLUGIN_SECRETS_VERSION=4.7.8
 # renovate: datasource=github-releases depName=kubernetes/kubernetes
