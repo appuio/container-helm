@@ -13,6 +13,8 @@ ENV KUBECTL_VERSION=v1.35.9
 
 # renovate: datasource=github-releases depName=jkroepke/helm-secrets
 ENV HELM_PLUGIN_SECRETS_VERSION=4.7.8
+# renovate: datasource=github-releases depName=jlandowner/helm-chartsnap
+ENV CHARTSNAP_VERSION=v0.6.0
 
 # `git` is used during CI/CD processes
 # `openssh` is used to clone git repositories via SSH
@@ -71,6 +73,7 @@ RUN set -x \
  && helm plugin install https://github.com/jkroepke/helm-secrets/releases/download/v${HELM_PLUGIN_SECRETS_VERSION}/secrets-${HELM_PLUGIN_SECRETS_VERSION}.tgz \
  && helm plugin install https://github.com/jkroepke/helm-secrets/releases/download/v${HELM_PLUGIN_SECRETS_VERSION}/secrets-getter-${HELM_PLUGIN_SECRETS_VERSION}.tgz \
  && helm plugin install https://github.com/jkroepke/helm-secrets/releases/download/v${HELM_PLUGIN_SECRETS_VERSION}/secrets-post-renderer-${HELM_PLUGIN_SECRETS_VERSION}.tgz \
+ && helm plugin install https://github.com/jlandowner/helm-chartsnap --verify=false --version "$CHARTSNAP_VERSION" \
  && git version \
  && helm version \
  && helm plugin list \
