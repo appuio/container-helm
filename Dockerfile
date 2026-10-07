@@ -68,4 +68,8 @@ RUN set -x \
  && chgrp -R 0 /app \
  && chmod -R g+rwX /app
 
+COPY --chmod=755 entrypoint.sh /entrypoint.sh
+
 USER 65534:0
+
+ENTRYPOINT ["/entrypoint.sh"]
