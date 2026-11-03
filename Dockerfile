@@ -15,7 +15,7 @@ ENV HELM_DIFF_VERSION=v3.15.15
 # renovate: datasource=github-releases depName=jkroepke/helm-secrets
 ENV HELM_PLUGIN_SECRETS_VERSION=4.7.9
 # renovate: datasource=github-releases depName=kubernetes/kubernetes
-ENV KUBECTL_VERSION=v1.37.1
+ENV KUBECTL_VERSION=v1.37.2
 
 # `git` is used during CI/CD processes
 # `openssh` is used to clone git repositories via SSH
