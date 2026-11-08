@@ -1,0 +1,80 @@
+name: AUTO Release Container Image
+
+# One-time label bootstrap (maintainer):
+#   gh label create "Publish container image" --description "Merge creates release tags and publishes container images" --color 0E8A16
+
+on:
+  pull_request:
+    types:
+      - labeled
+      - synchronize
+      - closed
+
+permissions:
+  contents: write
+  pull-requests: write
+  actions: write
+
+# Serialize runs per PR so two rapid events never race for the same -N suffix.
+concurrency:
+  group: auto-release-${{ github.event.pull_request.number }}
+  cancel-in-progress: false
+
+jobs:
+  auto-release:
+    if: >-
+      contains(github.event.pull_request.labels.*.name, 'Publish container image')
+      && (github.event.action != 'closed' || github.event.pull_request.merged == true)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout release commit
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # actions/checkout@v7
+        with:
+          ref: ${{ github.event.pull_request.merge_commit_sha }}
+          fetch-depth: 0 # full history so ${sha}^ resolves; tags are fetched by the script
+
+      - name: Plan release tags
+        id: plan
+        env:
+          RELEASE_SHA: ${{ github.event.pull_request.merge_commit_sha }}
+        run: ./auto-release-tags.sh "$RELEASE_SHA"
+
+      - name: Create release tags
+        if: >-
+          github.event.action == 'closed'
+          && github.event.pull_request.merged == true
+          && (steps.plan.outputs.v3_push == 'true' || steps.plan.outputs.v4_push == 'true')
+        env:
+          RELEASE_SHA: ${{ github.event.pull_request.merge_commit_sha }}
+          V3_TAG: ${{ steps.plan.outputs.v3_tag }}
+          V4_TAG: ${{ steps.plan.outputs.v4_tag }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          for tag in "$V3_TAG" "$V4_TAG"; do
+            [[ -n "$tag" ]] || continue
+            git tag -a "$tag" -m "Release $tag" "$RELEASE_SHA"
+            git push origin "refs/tags/$tag"
+          done
+
+      - name: Dispatch Release workflow (v3)
+        if: >-
+          github.event.action == 'closed'
+          && github.event.pull_request.merged == true
+          && steps.plan.outputs.v3_tag != ''
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          TAG: ${{ steps.plan.outputs.v3_tag }}
+        run: gh workflow run docker-build.yaml --ref "$TAG" -f "tag=$TAG"
+
+      - name: Dispatch Release workflow (v4)
+        if: >-
+          github.event.action == 'closed'
+          && github.event.pull_request.merged == true
+          && steps.plan.outputs.v4_tag != ''
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          TAG: ${{ steps.plan.outputs.v4_tag }}
+        run: gh workflow run docker-build-v4.yaml --ref "$TAG" -f "tag=$TAG"
