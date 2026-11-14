@@ -10,6 +10,14 @@ on:
       - .github/workflows/pr.yaml
       - Dockerfile
 
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Release tag to publish (e.g. v3.22.1; leave empty to derive from the Git ref)"
+        required: false
+        default: ""
+        type: string
+
 env:
   IMAGE_PATH: ${{ vars.IMAGE_PATH }}
 
@@ -28,11 +36,13 @@ jobs:
       run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $ --password-stdin
 
     - name: Set image tag from Git ref
+      env:
+        DISPATCH_TAG: ${{ github.event.inputs.tag || github.ref_name }}
       run: |
-        # Strip git ref prefix from version
-        IMAGE_TAG=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
-        # Strip "v" prefix from tag name
-        [[ "${{ github.ref }}" == "refs/tags/"* ]] && IMAGE_TAG=$(echo $IMAGE_TAG | sed -e 's/^v//')
+        # Explicitly dispatched tag wins (e.g. "v3.22.1"); otherwise the Git ref name
+        IMAGE_TAG="${DISPATCH_TAG}"
+        # Strip "v" prefix from tag name (input may carry it, tag refs always do)
+        IMAGE_TAG="${IMAGE_TAG#v}"
         # Use Docker `latest` tag convention
         [ "$IMAGE_TAG" == "main" ] && IMAGE_TAG=latest
 
@@ -43,3 +53,16 @@ jobs:
 
     - name: Push docker image
       run: make docker-push
+
+    - name: Push latest when this is the main tip
+      if: env.IMAGE_TAG != 'latest'
+      run: |
+        # Mirrors the Makefile's IMAGE_PATH default
+        image_path="${IMAGE_PATH:-appuio}"
+        git fetch origin +refs/heads/main:refs/remotes/origin/main
+        if [[ "$(git rev-parse HEAD)" == "$(git rev-parse origin/main)" ]]; then
+          docker tag "ghcr.io/${image_path}/helm:${IMAGE_TAG}" "ghcr.io/${image_path}/helm:latest"
+          docker push "ghcr.io/${image_path}/helm:latest"
+        else
+          echo "HEAD is not the tip of main; not pushing latest"
+        fi

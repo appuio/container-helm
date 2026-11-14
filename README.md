@@ -35,10 +35,25 @@ make docker-build
 
 ## Release Image
 
-Whenever the Helm version was updated, tag a new version:
+Merge a PR labelled `Publish container image` and the release happens automatically:
 
-    ./tag-release.sh
-    git push --tags
+1. On merge, the `AUTO Release Container Image` workflow creates the release tag(s) for every changed Dockerfile family and dispatches the `Release` / `Release v4` workflows for those tags, publishing `ghcr.io/appuio/helm:<tag>` / `ghcr.io/appuio/helm-v4:<tag>` (plus `:latest` when the tip of `main` was built).
+2. The planned release tags are also computed on label changes before the merge, so they are visible in the workflow run log.
+
+Manual fallback (signed tags between releases):
+
+```console
+./tag-release.sh
+git push --tags
+```
+
+Then run the Release workflow on that tag:
+
+```console
+gh workflow run Release --ref v3.22.1 -f tag=v3.22.1
+```
+
+Note: tags pushed via `GITHUB_TOKEN` do not trigger workflows, which is why the release workflows are dispatched explicitly.
 
 ---
 
